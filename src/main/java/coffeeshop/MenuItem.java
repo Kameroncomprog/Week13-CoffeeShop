@@ -11,7 +11,24 @@ package coffeeshop;
 // Commit message when it is all green:  step 1: MenuItem
 
 public class MenuItem {
+    private String name;
+    private double price;
 
-    // YOUR CODE
+    MenuItem(String name, double price){
+    this.name = name;
+    this.price = price;
+    }
+    String getName(){
+    return this.name;
+    }
+    Double getPrice(){
+    return this.price;
+    }
+    boolean isDrink(){
+    return false;
+    }
+    public String toString(){
+    return this.name + "- $ " + String.format("%.2f", getPrice());
+    }
 
 }
