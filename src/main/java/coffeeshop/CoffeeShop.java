@@ -43,7 +43,7 @@ public class CoffeeShop {
 
         completedOrders.add(order);
         totalSales += total;
-
+        // returns total
         return total;
     }
     // Returns the number of completed orders.
