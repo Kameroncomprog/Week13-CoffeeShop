@@ -18,6 +18,53 @@ import java.util.ArrayList;
 
 public class Order {
 
-    // YOUR CODE
+    public static final String COUPON_CODE = "HORNET10";
+    public static final int COUPON_PERCENT = 10;
+    private static int nextOrderNumber = 1;
+    private int orderNumber;
+    private ArrayList<MenuItem> items;
+    private int discountPercent;
+
+    public Order() {
+        this.orderNumber = nextOrderNumber;
+        nextOrderNumber++;
+
+        this.items = new ArrayList<MenuItem>();
+        this.discountPercent = 0;
+    }
+    // Returns the order number.
+    public int getOrderNumber() {
+        return this.orderNumber;
+    }
+    // Adds a menu item to the order.
+    public void addItem(MenuItem item) {
+        items.add(item);
+    }
+    // Removes an item using its position in the order.
+    public boolean removeItem(int number) {
+        if (number < 1 || number > items.size()) {
+            return false;
+        }
+        items.remove(number - 1);
+        return true;
+    }
+    // Returns the number of items in the order.
+    public int getItemCount() {
+        return items.size();
+    }
+    // Checks whether the order has any items.
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+    // Calculates and returns the subtotal before discounts.
+    public double getSubtotal() {
+        double subtotal = 0.0;
+
+        for (MenuItem item : items) {
+            subtotal += item.getPrice();
+        }
+
+        return subtotal;
+    }
 
 }
