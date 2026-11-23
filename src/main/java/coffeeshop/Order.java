@@ -32,14 +32,17 @@ public class Order {
         this.items = new ArrayList<MenuItem>();
         this.discountPercent = 0;
     }
+
     // Returns the order number.
     public int getOrderNumber() {
         return this.orderNumber;
     }
+
     // Adds a menu item to the order.
     public void addItem(MenuItem item) {
         items.add(item);
     }
+
     // Removes an item using its position in the order.
     public boolean removeItem(int number) {
         if (number < 1 || number > items.size()) {
@@ -48,14 +51,17 @@ public class Order {
         items.remove(number - 1);
         return true;
     }
+
     // Returns the number of items in the order.
     public int getItemCount() {
         return items.size();
     }
+
     // Checks whether the order has any items.
     public boolean isEmpty() {
         return items.isEmpty();
     }
+
     // Calculates and returns the subtotal before discounts.
     public double getSubtotal() {
         double subtotal = 0.0;
@@ -67,4 +73,40 @@ public class Order {
         return subtotal;
     }
 
+    // Checks whether the coupon code is valid and applies the discount.
+    public boolean applyCoupon(String code) {
+        if (COUPON_CODE.equals(code)) {
+            discountPercent = COUPON_PERCENT;
+            return true;
+        }
+
+        return false;
+    }
+
+    // Calculates the discount amount based on the subtotal.
+    public double getDiscount() {
+        return getSubtotal() * discountPercent / 100.0;
+    }
+
+    // Calculates the final total after applying the discount and tip.
+    public double getTotal(int tipPercent) {
+        double discountedSubtotal = getSubtotal() - getDiscount();
+
+        return discountedSubtotal + (discountedSubtotal * tipPercent / 100.0);
+    }
+
+    // Returns a String representation of the order.
+    @Override
+    public String toString() {
+        String result = "Order #" + orderNumber + "\n";
+
+        for (int i = 0; i < items.size(); i++) {
+            result += (i + 1) + ". " + items.get(i).toString() + "\n";
+        }
+        result += "Subtotal: $" + String.format("%.2f", getSubtotal());
+        result += "\nDiscount: $" + String.format("%.2f", getDiscount());
+
+        return result;
+    }
 }
+
